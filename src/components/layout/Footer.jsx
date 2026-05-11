@@ -1,23 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Container from '@/components/ui/Container';
 import GithubIcon from '@/icons/github.icon';
 import YouSearchLogo from '@/icons/logo.icon';
-import Link from 'next/link';
 import { Eye } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export default function Footer() {
   const [visitors, setVisitors] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
+      setLoading(true);
       try {
         const res = await fetch('/api/stats');
         const data = await res.json();
         if (data.visitors) setVisitors(data.visitors);
       } catch (err) {
         console.error('Failed to fetch stats', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchStats();
@@ -55,9 +59,11 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-50 rounded-full border border-slate-100">
+            <div className="flex items-center space-x-1.5 rounded-full border border-slate-100 bg-slate-50 px-3 py-1.5">
               <Eye size={14} className="text-slate-400" />
-              <span className="text-xs font-medium text-slate-500">{visitors.toLocaleString()}</span>
+              <span className="text-xs font-medium text-slate-500">
+                {loading ? 'Counting...' : visitors.toLocaleString()}
+              </span>
             </div>
             <a
               href="https://github.com/sajid-islam/you-search"

@@ -46,7 +46,9 @@ export default function StopTutorialHellSection() {
                 <div className="text-sm font-medium text-slate-400">Tutorials searched</div>
               </div>
               <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                <div className="mb-1 text-2xl font-bold text-slate-900">450h</div>
+                <div className="mb-1 text-2xl font-bold text-slate-900">
+                  {Math.floor((searches * 15) / 60).toLocaleString()}h
+                </div>
                 <div className="text-sm font-medium text-slate-400">Hours saved</div>
               </div>
             </div>
