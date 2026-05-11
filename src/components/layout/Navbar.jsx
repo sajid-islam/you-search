@@ -7,8 +7,11 @@ import CTAButton from "@/components/ui/CTAButton";
 import { cn } from "@/lib/utils";
 import YouSearchLogo from "@/icons/logo.icon";
 
+import { useSearchDialog } from "@/context/SearchDialogContext";
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const { openDialog } = useSearchDialog();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,7 +58,11 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <CTAButton variant="primary" size="sm">
+            <CTAButton 
+              variant="primary" 
+              size="sm"
+              onClick={() => openDialog()}
+            >
               Try Now
             </CTAButton>
           </div>

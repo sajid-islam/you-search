@@ -1,6 +1,8 @@
-import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
 import { satoshi } from './fonts';
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import { SearchDialogProvider } from "@/context/SearchDialogContext";
+import SearchDialog from "@/components/ui/SearchDialog";
 
 import './globals.css';
 
@@ -17,9 +19,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${satoshi.className} h-full scroll-smooth antialiased`}>
       <body className="flex min-h-full flex-col bg-slate-50 text-slate-900">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <SearchDialogProvider>
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <SearchDialog />
+        </SearchDialogProvider>
       </body>
     </html>
   );

@@ -1,7 +1,10 @@
 import Container from '@/components/ui/Container';
 import CTAButton from '@/components/ui/CTAButton';
+import { useSearchDialog } from "@/context/SearchDialogContext";
 
 export default function FinalCTASection() {
+  const { openDialog } = useSearchDialog();
+
   return (
     <section className="bg-white py-24">
       <Container>
@@ -25,6 +28,7 @@ export default function FinalCTASection() {
                 variant="secondary"
                 size="lg"
                 className="text-primary border-none bg-white shadow-xl shadow-black/10 hover:bg-slate-50"
+                onClick={() => openDialog()}
               >
                 Start Your Focus Session
               </CTAButton>
