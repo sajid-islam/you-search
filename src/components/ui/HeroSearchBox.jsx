@@ -25,6 +25,12 @@ export default function HeroSearchBox() {
                 placeholder="What do you want to learn? (e.g. Next.js auth)"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && inputValue.trim()) {
+                    openDialog(inputValue);
+                    setInputValue('');
+                  }
+                }}
                 className="w-full border-none bg-transparent py-3.5 pr-4 pl-12 text-base text-slate-900 placeholder-slate-400 focus:ring-0 focus:outline-none md:text-lg"
               />
             </div>
