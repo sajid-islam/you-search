@@ -1,70 +1,37 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Search, ChevronDown, Sparkles } from "lucide-react";
-import CTAButton from "@/components/ui/CTAButton";
+import CTAButton from '@/components/ui/CTAButton';
+import { Search, Sparkles } from 'lucide-react';
 
 export default function HeroSearchBox() {
-  const [level, setLevel] = useState("Intermediate");
-  const [type, setType] = useState("Project Based");
-
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <div className="relative group">
+    <div className="mx-auto w-full max-w-2xl">
+      <div className="group relative">
         {/* Background glow */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
-        
-        <div className="relative bg-white rounded-2xl shadow-xl shadow-primary/5 border border-slate-100 p-2 md:p-3">
-          <div className="flex flex-col space-y-3">
-            <div className="relative flex items-center">
+        <div className="from-primary to-secondary absolute -inset-1 rounded-2xl bg-gradient-to-r opacity-20 blur transition duration-1000 group-hover:opacity-30 group-hover:duration-200"></div>
+
+        <div className="shadow-primary/5 relative rounded-2xl border border-slate-100 bg-white p-1.5 shadow-xl">
+          <div className="flex items-center">
+            <div className="relative flex flex-grow items-center">
               <Search className="absolute left-4 text-slate-400" size={20} />
-              <input 
+              <input
                 type="text"
-                placeholder="What do you want to learn? (e.g. Next.js authentication)"
-                className="w-full pl-12 pr-4 py-4 bg-transparent border-none focus:ring-0 text-slate-900 placeholder-slate-400 text-lg"
+                placeholder="What do you want to learn? (e.g. Next.js auth)"
+                className="w-full border-none bg-transparent py-3.5 pr-4 pl-12 text-base text-slate-900 placeholder-slate-400 focus:ring-0 focus:outline-none md:text-lg"
               />
             </div>
-            
-            <div className="flex flex-wrap items-center gap-3 px-2 pb-2">
-              <div className="relative">
-                <select 
-                  value={level}
-                  onChange={(e) => setLevel(e.target.value)}
-                  className="appearance-none pl-3 pr-8 py-2 bg-slate-50 border border-slate-100 rounded-lg text-sm font-medium text-slate-600 focus:outline-none focus:border-primary cursor-pointer"
-                >
-                  <option>Beginner</option>
-                  <option>Intermediate</option>
-                  <option>Advanced</option>
-                </select>
-                <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-              </div>
 
-              <div className="relative">
-                <select 
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                  className="appearance-none pl-3 pr-8 py-2 bg-slate-50 border border-slate-100 rounded-lg text-sm font-medium text-slate-600 focus:outline-none focus:border-primary cursor-pointer"
-                >
-                  <option>Playlist</option>
-                  <option>Crash Course</option>
-                  <option>Project Based</option>
-                </select>
-                <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
-              </div>
-
-              <div className="ml-auto">
-                <CTAButton className="flex items-center space-x-2">
-                  <Sparkles size={16} />
-                  <span>Generate Search</span>
-                </CTAButton>
-              </div>
+            <div className="shrink-0">
+              <CTAButton className="flex items-center space-x-2 rounded-xl">
+                <Sparkles size={16} />
+                <span className="hidden sm:inline">Generate Search</span>
+                <span className="sm:hidden">Generate</span>
+              </CTAButton>
             </div>
           </div>
         </div>
       </div>
-      <p className="text-center mt-4 text-sm text-slate-400">
-        Less distractions. More learning.
-      </p>
+      <p className="mt-4 text-center text-sm text-slate-400">Less distractions. More learning.</p>
     </div>
   );
 }
