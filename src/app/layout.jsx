@@ -9,7 +9,7 @@ export const metadata = {
   title: 'PROJECT NAME',
   description: 'PROJECT DESCRIPTION',
   icons: {
-    icon: '/logo.png',
+    icon: '/logo.svg',
   },
 };
 
