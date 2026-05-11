@@ -1,9 +1,27 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Container from '@/components/ui/Container';
 import GithubIcon from '@/icons/github.icon';
 import YouSearchLogo from '@/icons/logo.icon';
 import Link from 'next/link';
+import { Eye } from 'lucide-react';
 
 export default function Footer() {
+  const [visitors, setVisitors] = useState(0);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        if (data.visitors) setVisitors(data.visitors);
+      } catch (err) {
+        console.error('Failed to fetch stats', err);
+      }
+    };
+    fetchStats();
+  }, []);
   return (
     <footer className="border-t border-slate-100 bg-white py-12">
       <Container>
@@ -37,6 +55,10 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-50 rounded-full border border-slate-100">
+              <Eye size={14} className="text-slate-400" />
+              <span className="text-xs font-medium text-slate-500">{visitors.toLocaleString()}</span>
+            </div>
             <a
               href="https://github.com/sajid-islam/you-search"
               title="Contribute to YouSearch on GitHub"

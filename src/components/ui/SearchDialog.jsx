@@ -30,14 +30,28 @@ export default function SearchDialog() {
     ? `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
     : '';
 
+  const logSearch = async () => {
+    try {
+      await fetch('/api/stats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'search' }),
+      });
+    } catch (err) {
+      console.error('Failed to log search action', err);
+    }
+  };
+
   const handleCopy = () => {
     navigator.clipboard.writeText(youtubeLink);
     setCopied(true);
+    logSearch();
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleOpenYoutube = () => {
     if (youtubeLink) {
+      logSearch();
       window.open(youtubeLink, '_blank');
     }
   };
